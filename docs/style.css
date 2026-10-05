@@ -124,12 +124,13 @@ h1, h2, h3 { margin: 0; font-weight: inherit; }
   .hero__cta { justify-content: center; }
 }
 
-/* ---- the billing block: the credits at the foot of a film poster ---------- */
-.billing { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
-.billing p { max-width: 1180px; margin: 0 auto; padding: 28px clamp(20px, 4.45vw, 64px); font-size: clamp(22px, 2.9vw, 40px); line-height: 1.3; font-weight: 300; letter-spacing: .07em; text-align: center; text-wrap: balance; }
-.billing span { display: inline-block; margin: 0 .35em; white-space: nowrap; }
-.billing small { margin: 0 .5em; font-family: var(--cond); font-size: .34em; font-weight: 500; letter-spacing: .2em; vertical-align: 1.3em; }
-.billing small:first-child { margin-left: 0; }
+/* ---- the rule: one line, set as large as the name ---------------------------- */
+.rule { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.rule > .wrap { padding-top: 56px; padding-bottom: 56px; }
+.rule__line { margin: 28px 0 20px; font-size: clamp(40px, 8.4vw, 124px); line-height: 1; font-weight: 500; letter-spacing: .04em; }
+.rule__line span { display: inline-block; white-space: nowrap; }
+.rule__line b { font-weight: inherit; color: var(--red); }
+.rule__note { max-width: 520px; font-size: 18px; line-height: 1.55; text-wrap: pretty; }
 
 /* ---- about -------------------------------------------------------------- */
 .about { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 64px; padding-top: 96px; padding-bottom: 96px; }
