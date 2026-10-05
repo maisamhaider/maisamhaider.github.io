@@ -170,7 +170,7 @@ h1, h2, h3 { margin: 0; font-weight: inherit; }
 .idx__no { width: 32px; }
 .idx__name { flex: 1 1 240px; font-size: 26px; line-height: 1.2; font-weight: 400; letter-spacing: .2em; transition: transform .35s var(--ease), color .25s ease; }
 .idx__line { flex: 1.5 1 300px; font-size: 16px; line-height: 1.5; }
-.idx__tags { width: 220px; }
+.idx__tags { width: 240px; line-height: 1.7; }
 .idx__status { width: 170px; }
 .idx svg, .idx__sp { width: 26px; height: 26px; }
 .idx svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s ease, color .25s ease; }
