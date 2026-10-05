@@ -115,12 +115,12 @@ h1, h2, h3 { margin: 0; font-weight: inherit; }
   .hero__cta { justify-content: center; }
 }
 
-/* ---- the moving strip --------------------------------------------------- */
-.strip { height: 64px; display: flex; align-items: center; overflow: hidden; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
-.strip__track { display: flex; width: max-content; animation: mq 36s linear infinite; }
-.strip__set { display: flex; align-items: center; gap: 36px; padding-right: 36px; font-size: 13px; letter-spacing: .32em; white-space: nowrap; }
-.strip__set i { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
-@keyframes mq { to { transform: translateX(-50%); } }
+/* ---- the billing block: the credits at the foot of a film poster ---------- */
+.billing { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.billing p { max-width: 1180px; margin: 0 auto; padding: 28px clamp(20px, 4.45vw, 64px); font-size: clamp(22px, 2.9vw, 40px); line-height: 1.3; font-weight: 300; letter-spacing: .07em; text-align: center; text-wrap: balance; }
+.billing span { display: inline-block; margin: 0 .35em; white-space: nowrap; }
+.billing small { margin: 0 .5em; font-family: var(--cond); font-size: .34em; font-weight: 500; letter-spacing: .2em; vertical-align: 1.3em; }
+.billing small:first-child { margin-left: 0; }
 
 /* ---- about -------------------------------------------------------------- */
 .about { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 64px; padding-top: 96px; padding-bottom: 96px; }
