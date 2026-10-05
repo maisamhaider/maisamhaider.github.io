@@ -12,7 +12,9 @@
   "lookingFor": "",
   "stack": "Kotlin, Android, Firebase, Python, TensorFlow",
 
-  "photo": "",
+  "photo": "portrait.webp",
+  "photoStyle": "artwork",
+  "photoSize": [1103, 1426],
   "cv": "",
 
   "links": [

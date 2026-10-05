@@ -61,7 +61,9 @@ if ($site.openToInternships) {
 }
 
 function Head($title, $desc, $path, $type) {
-  Fill (Src '_head.html') @{ TITLE = (Esc $title); DESC = (Esc $desc); CANON = "$base$path"; OGTYPE = $type }
+  $image = ''
+  if ($site.photo) { $image = "<meta property=`"og:image`" content=`"$base/assets/$($site.photo)`">" }
+  Fill (Src '_head.html') @{ TITLE = (Esc $title); DESC = (Esc $desc); CANON = "$base$path"; OGTYPE = $type; OGIMAGE = $image }
 }
 function Top($onEssays) {
   $cur = ''
@@ -115,9 +117,18 @@ Write-Text (Join-Path $out 'essays\index.html') (Fill (Src 'essays.html') @{
 # Every i in the name is set bold and red, like the doubled letter on a film poster.
 $nameHtml = (Esc $site.name) -replace '(?i)i', '<span class="hot">$0</span>'
 
+# The picture in the middle of the poster. site.json "photoStyle" says what the file is:
+#   "artwork"  a finished piece that already has its own red sun and lines (shown as it is)
+#   "cutout"   a person on a transparent background (placed on the drawn sun, turned black and white)
+# With no photo at all, a plain silhouette stands in.
+$artwork = $false
 if ($site.photo) {
   if (-not (Test-Path (Join-Path $assets $site.photo))) { throw "site.json names the photo '$($site.photo)' but assets\$($site.photo) does not exist." }
-  $figure = "<img class=`"figure figure--photo`" src=`"/assets/$($site.photo)`" alt=`"Portrait of $(Esc $site.name)`">"
+  $artwork = ($site.photoStyle -eq 'artwork')
+  $size = ''
+  if ($site.photoSize) { $size = " width=`"$($site.photoSize[0])`" height=`"$($site.photoSize[1])`"" }
+  $cls = $(if ($artwork) { 'artwork' } else { 'figure figure--photo' })
+  $figure = "<img class=`"$cls`" src=`"/assets/$($site.photo)`"$size alt=`"Portrait of $(Esc $site.name)`">"
 } else {
   $missing += 'photo'
   $figure = '<svg class="figure" viewBox="0 0 300 400" aria-hidden="true"><ellipse cx="150" cy="108" rx="60" ry="76"></ellipse><path d="M120 160h60v84h-60z"></path><path d="M18 400C18 300 66 250 150 236 234 250 282 300 282 400z"></path></svg>'
@@ -129,13 +140,19 @@ $dw = 3, 2, 4, 1, 3, 2, 5, 1, 2, 3, 4, 1, 3, 2, 2, 3, 5, 1, 2, 3, 1, 4, 2, 3, 2,
 $drips = ''
 for ($i = 0; $i -lt $dh.Count; $i++) {
   $delay = (1.1 + (($i * 37) % 11) * 0.08).ToString('0.00', $inv)
-  $gap = $(if ($i % 6 -eq 3) { ' class="gap"' } else { '' })
+  # Under an artwork the streaks are sparse and a few are red, to sit with the ones painted in it.
+  if ($artwork) { $gap = $(if ($i % 2 -eq 1) { ' class="gap"' } elseif ($i % 8 -eq 2) { ' class="hot"' } else { '' }) }
+  else          { $gap = $(if ($i % 6 -eq 3) { ' class="gap"' } else { '' }) }
   $drips += "<span$gap style=`"--w:$($dw[$i]);--h:$($dh[$i])%;--d:${delay}s`"></span>"
 }
 $ch = 60, 100, 35, 80, 50, 90, 25
 $cw = 2, 1, 3, 1, 2, 1, 2
 $cardDrips = ''
 for ($i = 0; $i -lt $ch.Count; $i++) { $cardDrips += "<span style=`"--w:$($cw[$i]);--h:$($ch[$i])%`"></span>" }
+
+$dripsHtml = "<div class=`"drips`" aria-hidden=`"true`">$drips</div>"
+if ($artwork) { $art = "$figure`n$dripsHtml"; $artClass = ' poster__art--artwork' }
+else          { $art = "<div class=`"sun`"></div>`n$(Src '_lines.svg')$figure`n$dripsHtml"; $artClass = '' }
 
 $facts = ''
 foreach ($row in @(@('Based in', $site.city, 'city'), @('Studying', $site.studying, 'studying'), @('Looking for', $site.lookingFor, 'lookingFor'), @('Stack', $site.stack, 'stack'))) {
@@ -176,8 +193,8 @@ Write-Text (Join-Path $out 'index.html') (Fill (Src 'index.html') @{
   TOP       = Top $false
   NAME_HTML = $nameHtml
   NAME      = Esc $site.name
-  FIGURE    = $figure
-  DRIPS     = $drips
+  ART       = $art
+  ART_CLASS = $artClass
   FACTS     = $facts
   CV        = $cv
   PROJECTS  = $projects
