@@ -37,6 +37,17 @@ by hand: it is rebuilt from scratch every run.
 
 ## Photo and CV
 
-Put the files in `assets/` and name them in `site.json` (`"photo": "portrait.png"`,
-`"cv": "cv.pdf"`). The portrait should be a cut-out with a transparent background;
-the page turns it black and white.
+Put the files in `assets/` and name them in `site.json` (`"photo": "portrait.webp"`,
+`"cv": "cv.pdf"`).
+
+The portrait is a finished artwork (`"photoStyle": "artwork"`). The original, on its paper
+background, is kept in `source/portrait.webp`; `tools/portrait.py` removes the paper so the
+picture sits on the site's own background, and prints the `photoSize` and `photoFocus` values
+for `site.json`:
+
+```
+python tools/portrait.py source/portrait.webp assets/portrait.webp
+```
+
+(It needs Pillow and NumPy.) A plain cut-out of a person on a transparent background can be
+used instead with `"photoStyle": "cutout"`; the page then draws the red sun and lines itself.

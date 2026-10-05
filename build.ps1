@@ -142,7 +142,10 @@ if ($site.photo) {
   $size = ''
   if ($site.photoSize) { $size = " width=`"$($site.photoSize[0])`" height=`"$($site.photoSize[1])`"" }
   $cls = $(if ($artwork) { 'artwork' } else { 'figure figure--photo' })
-  $figure = "<img class=`"$cls`" src=`"/assets/$($site.photo)`"$size alt=`"Portrait of $(Esc $site.name)`">"
+  # photoFocus = the centre of the sun in the picture, in percent; the picture opens from there.
+  $focus = ''
+  if ($artwork -and $site.photoFocus) { $focus = " style=`"--fx:$($site.photoFocus[0])%;--fy:$($site.photoFocus[1])%`"" }
+  $figure = "<img class=`"$cls`" src=`"/assets/$($site.photo)`"$size$focus alt=`"Portrait of $(Esc $site.name)`">"
 } else {
   $missing += 'photo'
   $figure = '<svg class="figure" viewBox="0 0 300 400" aria-hidden="true"><ellipse cx="150" cy="108" rx="60" ry="76"></ellipse><path d="M120 160h60v84h-60z"></path><path d="M18 400C18 300 66 250 150 236 234 250 282 300 282 400z"></path></svg>'

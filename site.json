@@ -14,7 +14,8 @@
 
   "photo": "portrait.webp",
   "photoStyle": "artwork",
-  "photoSize": [1103, 1426],
+  "photoSize": [859, 1267],
+  "photoFocus": [49, 27.6],
   "cv": "",
 
   "links": [

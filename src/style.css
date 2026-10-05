@@ -78,7 +78,7 @@ h1, h2, h3 { margin: 0; font-weight: inherit; }
 @keyframes gather { from { opacity: 0; transform: translateX(calc(var(--o) * .5em)); } to { opacity: 1; transform: translateX(0); } }
 .credits { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 14px; margin-top: 18px; }
 .credits i { font-family: var(--cond); font-size: 12px; font-style: normal; color: #6B6862; }
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .credits { gap: 6px 22px; }
   .credits i { display: none; }
 }
@@ -88,7 +88,7 @@ h1, h2, h3 { margin: 0; font-weight: inherit; }
 .poster { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px 16px; margin-top: 20px; }
 .poster__say { flex: 1 1 200px; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; text-align: right; }
 .poster__say p { font-size: clamp(28px, 3.3vw, 49px); line-height: 1.04; font-weight: 600; letter-spacing: .04em; color: var(--red); }
-.poster__art { flex: 0 1 clamp(340px, 66vh, 590px); align-self: flex-start; position: relative; aspect-ratio: 620 / 740; }
+.poster__art { flex: 0 1 clamp(340px, 60vh, 580px); align-self: flex-start; position: relative; aspect-ratio: 620 / 740; }
 .poster__bio { flex: 1 1 200px; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; gap: 16px; padding-bottom: 48px; text-align: left; }
 .poster__bio p { max-width: 300px; font-size: 15px; line-height: 1.55; text-wrap: pretty; }
 .poster__year { font-size: 30px; line-height: 1; font-weight: 500; letter-spacing: .12em; color: var(--red); }
@@ -113,9 +113,9 @@ h1, h2, h3 { margin: 0; font-weight: inherit; }
 .poster__art--artwork { aspect-ratio: auto; }
 .artwork { display: block; width: 100%; height: auto; filter: saturate(.85); animation: open 3.4s cubic-bezier(.45, 0, .25, 1) .35s both; }
 /* Slow on purpose: the circle only has to reach 90% to uncover the whole picture, so none of the time is spent off-canvas. */
-@keyframes open { from { opacity: 0; clip-path: circle(0% at 52% 34%); } 35% { opacity: 1; } to { opacity: 1; clip-path: circle(90% at 52% 34%); } }
+@keyframes open { from { opacity: 0; clip-path: circle(0% at var(--fx, 50%) var(--fy, 30%)); } 35% { opacity: 1; } to { opacity: 1; clip-path: circle(95% at var(--fx, 50%) var(--fy, 30%)); } }
 /* Thin streaks that run on from the painted ones; their tops fade into the picture. */
-.poster__art--artwork .drips { left: 15%; top: 74%; width: 60%; height: 31%; justify-content: space-between; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 45%); mask-image: linear-gradient(to bottom, transparent, #000 45%); }
+.poster__art--artwork .drips { left: 16%; top: 80%; width: 62%; height: 23%; justify-content: space-between; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 45%); mask-image: linear-gradient(to bottom, transparent, #000 45%); }
 .poster__art--artwork .drips span { flex: 0 0 calc(var(--w) * 1.4px); animation-delay: calc(var(--d) + 2.2s), calc(var(--d) + 4s); }
 .drips .hot { background: var(--red); }
 .hero__cta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; margin-top: 20px; }
