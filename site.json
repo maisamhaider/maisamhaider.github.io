@@ -19,19 +19,22 @@
   "photoFocus": [49, 27.6],
   "cv": "",
 
-  "phone": "+33 7 64 39 91 98",
+  "phoneNote": "phone is left empty on purpose: the number is not printed on the site, only reachable through the WhatsApp button.",
+  "phone": "",
   "whatsapp": "+33 7 64 39 91 98",
 
   "linksNote": "Paste a profile's full address between the quotes and it appears in Contact. Empty ones are left out.",
   "links": [
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/maisamhaider/" },
     { "label": "GitHub", "url": "https://github.com/maisamhaider" },
-    { "label": "LinkedIn", "url": "" },
-    { "label": "X", "url": "" },
-    { "label": "Instagram", "url": "" },
-    { "label": "Threads", "url": "" },
-    { "label": "Facebook", "url": "" },
-    { "label": "TikTok", "url": "" },
-    { "label": "Pinterest", "url": "" },
+    { "label": "X", "url": "https://x.com/MH_Toori" },
+    { "label": "Instagram", "url": "https://www.instagram.com/mh_turi/" },
+    { "label": "Threads", "url": "https://www.threads.com/@mh_turi" },
+    { "label": "Facebook", "url": "https://www.facebook.com/maisamhaidertoori/" },
+    { "label": "TikTok", "url": "https://www.tiktok.com/@haidermaisam" },
+    { "label": "YouTube", "url": "https://www.youtube.com/@mh_zilloris" },
+    { "label": "Pinterest", "url": "https://www.pinterest.com/zilloris_maisamhaider/_pins/" },
+    { "label": "Reddit", "url": "https://www.reddit.com/user/maisamhaider/" },
     { "label": "zilloris.com", "url": "https://zilloris.com" }
   ],
 

@@ -253,18 +253,20 @@ else { $missing += 'email' }
 
 $links = ''
 foreach ($l in $site.links) {
-  if ($l.url) { $links += "<a class=`"cap navl`" href=`"$($l.url)`">$(Esc $l.label)</a>`n" } else { $missing += "link: $($l.label)" }
+  if ($l.url) { $links += "<a class=`"cap navl`" href=`"$($l.url)`" rel=`"me noopener`">$(Esc $l.label)</a>`n" } else { $missing += "link: $($l.label)" }
 }
 
-# The studio's number: shown large in Contact, with WhatsApp first among the links.
+# A phone number, if one is given, is shown large in Contact.
 $phone = ''
 if ($site.phone) {
   $tel = ([string]$site.phone) -replace '[^0-9+]', ''
   $phone = "<a class=`"an navl contact__mail rv`" href=`"tel:$tel`">$(Esc $site.phone)</a>"
 }
+# WhatsApp: the large line when no phone number is printed, otherwise first among the links.
 if ($site.whatsapp) {
   $wa = ([string]$site.whatsapp) -replace '[^0-9]', ''
-  $links = "<a class=`"cap navl`" href=`"https://wa.me/$wa`">WhatsApp</a>`n" + $links
+  if ($site.phone) { $links = "<a class=`"cap navl`" href=`"https://wa.me/$wa`">WhatsApp</a>`n" + $links }
+  else { $phone = "<a class=`"an navl contact__mail contact__mail--caps rv`" href=`"https://wa.me/$wa`">Message me on WhatsApp</a>" }
 }
 
 $xp = ''
