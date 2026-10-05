@@ -172,7 +172,7 @@ if ($artwork) { $art = "$figure`n$dripsHtml"; $artClass = ' poster__art--artwork
 else          { $art = "<div class=`"sun`"></div>`n$(Src '_lines.svg')$figure`n$dripsHtml"; $artClass = '' }
 
 $facts = ''
-foreach ($row in @(@('Based in', $site.city, 'city'), @('Studying', $site.studying, 'studying'), @('Looking for', $site.lookingFor, 'lookingFor'), @('Stack', $site.stack, 'stack'))) {
+foreach ($row in @(@('Based in', $site.city, 'city'), @('Studying', $site.studying, 'studying'), @('Coursework', $site.coursework, 'coursework'),@('Looking for', $site.lookingFor, 'lookingFor'), @('Stack', $site.stack, 'stack'))) {
   if ($row[1]) { $facts += "<div><dt class=`"cap`">$($row[0])</dt><dd>$(Esc $row[1])</dd></div>`n" } else { $missing += $row[2] }
 }
 
