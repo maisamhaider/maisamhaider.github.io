@@ -1,0 +1,43 @@
+{
+  "note": "Everything the site knows about you. Leave a value empty (\"\") and the site simply leaves that line out, so it can go live before every blank is filled. After any change run build.ps1.",
+
+  "name": "Maisam Haider",
+  "url": "https://maisamhaider.github.io",
+  "description": "Maisam Haider — software engineer and founder of Zilloris. Small Android apps, data science, and essays.",
+
+  "openToInternships": true,
+  "email": "",
+  "city": "",
+  "studying": "CESI · Data Science",
+  "lookingFor": "",
+  "stack": "Kotlin, Android, Firebase, Python, TensorFlow",
+
+  "photo": "",
+  "cv": "",
+
+  "links": [
+    { "label": "GitHub", "url": "https://github.com/maisamhaider" },
+    { "label": "LinkedIn", "url": "" },
+    { "label": "zilloris.com", "url": "https://zilloris.com" }
+  ],
+
+  "projects": [
+    { "name": "One Page", "line": "Read one page a day.", "status": "Live on Google Play", "state": "live", "url": "https://zilloris.com/one-page/" },
+    { "name": "Manuscript", "line": "Write one page a day until the draft is done.", "status": "In testing on Google Play", "state": "testing", "url": "https://zilloris.com/manuscript/" },
+    { "name": "Sabr", "line": "Quit one habit, build another.", "status": "In testing on Google Play", "state": "testing", "url": "https://zilloris.com/sabr/" },
+    { "name": "Nightbook", "line": "A dream journal for the morning.", "status": "In development", "state": "dev", "url": "" },
+    { "name": "Projet Leyenda", "line": "Neural networks that classify, denoise and caption images.", "status": "In progress at CESI", "state": "dev", "url": "" },
+    { "name": "zilloris.com", "line": "The studio site. Plain HTML, no JavaScript, no tracking.", "status": "Live", "state": "live", "url": "https://zilloris.com" }
+  ],
+
+  "essays": [
+    {
+      "slug": "how-essays-work",
+      "title": "How essays work on this site",
+      "date": "2026-10-05",
+      "kind": "Note",
+      "summary": "A draft that shows the essay page and explains how to add your own. It is never published.",
+      "draft": true
+    }
+  ]
+}

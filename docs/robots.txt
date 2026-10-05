@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://maisamhaider.github.io/sitemap.xml
