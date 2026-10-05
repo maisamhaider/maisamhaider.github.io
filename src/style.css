@@ -143,6 +143,19 @@ h1, h2, h3 { margin: 0; font-weight: inherit; }
 .facts div { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 16px 0; border-top: 1px solid var(--ink); }
 .facts dd { margin: 0; font-size: 16px; text-align: right; }
 .about__facts .btn { margin-top: 32px; }
+.xp { flex: 1 1 100%; }
+.xp__row { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px 48px; align-items: start; margin-top: 16px; padding: 28px 0; border-bottom: 1px solid var(--ink); }
+.xp__years { padding-top: 0; }
+.xp__what h3 { font-size: clamp(28px, 2.8vw, 38px); line-height: 1.1; font-weight: 400; letter-spacing: .12em; }
+.xp__what p { margin-top: 10px; line-height: 1.6; }
+.xp__points { margin: 0; padding: 0; list-style: none; font-size: 16px; line-height: 1.55; }
+.xp__points li { position: relative; padding-left: 20px; }
+.xp__points li + li { margin-top: 10px; }
+.xp__points li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; background: var(--ink); }
+@media (min-width: 900px) {
+  .xp__row { grid-template-columns: 160px minmax(0, 1fr) minmax(0, 1.5fr); }
+  .xp__years { padding-top: 12px; }
+}
 
 /* ---- work: poster rows, then a list ---------------------------------------- */
 .band { border-top: 1px solid var(--ink); }
@@ -230,7 +243,7 @@ a.idx:hover svg { transform: translate(4px, -4px); color: var(--red); }
 .contact > .wrap { padding-top: 96px; }
 .contact h2 { margin-top: 16px; padding-left: .3em; font-size: clamp(36px, 8.3vw, 120px); line-height: 1.1; font-weight: 300; letter-spacing: .3em; }
 .contact__say { max-width: 480px; margin: 24px auto 16px; }
-.contact__mail { font-size: clamp(24px, 3.4vw, 34px); line-height: 1.2; font-weight: 500; letter-spacing: .08em; text-transform: none; }
+.contact__mail { display: block; width: fit-content; margin: 0 auto; font-size: clamp(24px, 3.4vw, 34px); line-height: 1.2; font-weight: 500; letter-spacing: .08em; text-transform: none; }
 .contact__links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 40px; margin-top: 16px; }
 .dawn { position: relative; height: 260px; margin-top: 64px; overflow: clip; }
 .dawn__sun { position: absolute; left: 50%; top: 0; width: min(620px, 92%); aspect-ratio: 1 / 1; margin-left: max(-310px, -46%); border-radius: 50%; background: var(--red); }

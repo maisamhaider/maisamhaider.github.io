@@ -11,7 +11,7 @@
   "studying": "Master of Computer Science, CESI · 2025–2027",
   "coursework": "Data science, AI and deep learning, advanced web development, management",
   "lookingFor": "",
-  "stack": "Kotlin, Android, Firebase, Python, TensorFlow",
+  "stack": "Kotlin, Java, Android, Firebase, Python, TensorFlow, Cloudflare, Bunny",
 
   "photo": "portrait.webp",
   "photoStyle": "artwork",
@@ -19,10 +19,33 @@
   "photoFocus": [49, 27.6],
   "cv": "",
 
+  "phone": "+33 7 64 39 91 98",
+  "whatsapp": "+33 7 64 39 91 98",
+
+  "linksNote": "Paste a profile's full address between the quotes and it appears in Contact. Empty ones are left out.",
   "links": [
     { "label": "GitHub", "url": "https://github.com/maisamhaider" },
     { "label": "LinkedIn", "url": "" },
+    { "label": "X", "url": "" },
+    { "label": "Instagram", "url": "" },
+    { "label": "Threads", "url": "" },
+    { "label": "Facebook", "url": "" },
+    { "label": "TikTok", "url": "" },
+    { "label": "Pinterest", "url": "" },
     { "label": "zilloris.com", "url": "https://zilloris.com" }
+  ],
+
+  "experience": [
+    {
+      "role": "Android Developer",
+      "years": "2019 — 2024",
+      "where": "Hura Technologies · 9D Technologies",
+      "points": [
+        "Developed and maintained production Android applications in Kotlin and Java",
+        "Translated designs into performant, accessible UIs; multi-device and OS compatibility",
+        "Collaborated closely with QA and product teams; owned release cycles and post-launch monitoring"
+      ]
+    }
   ],
 
   "projectsNote": "Featured projects become the large poster rows. shot = a screenshot in the app's own repo (path from the folder above this one), cropTop cuts off the phone's status bar, motif = quarter, cross or rings. The rest are listed under More work.",

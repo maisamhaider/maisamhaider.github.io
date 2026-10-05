@@ -256,6 +256,25 @@ foreach ($l in $site.links) {
   if ($l.url) { $links += "<a class=`"cap navl`" href=`"$($l.url)`">$(Esc $l.label)</a>`n" } else { $missing += "link: $($l.label)" }
 }
 
+# The studio's number: shown large in Contact, with WhatsApp first among the links.
+$phone = ''
+if ($site.phone) {
+  $tel = ([string]$site.phone) -replace '[^0-9+]', ''
+  $phone = "<a class=`"an navl contact__mail rv`" href=`"tel:$tel`">$(Esc $site.phone)</a>"
+}
+if ($site.whatsapp) {
+  $wa = ([string]$site.whatsapp) -replace '[^0-9]', ''
+  $links = "<a class=`"cap navl`" href=`"https://wa.me/$wa`">WhatsApp</a>`n" + $links
+}
+
+$xp = ''
+foreach ($e in $site.experience) {
+  $points = ($e.points | ForEach-Object { "<li>$(Esc $_)</li>" }) -join ''
+  $xp += "<article class=`"xp__row`"><div class=`"cap red xp__years`">$(Esc $e.years)</div><div class=`"xp__what`"><h3 class=`"an`">$(Esc $e.role)</h3><p class=`"cap`">$(Esc $e.where)</p></div><ul class=`"xp__points`">$points</ul></article>`n"
+}
+$experience = ''
+if ($xp) { $experience = "<div class=`"xp rv`">`n<div class=`"cap measure`"><span>Experience</span><i></i></div>`n$xp</div>" }
+
 $homeEssays = Essay-List @($essays | Select-Object -First 3) '<p class="more"><a class="cap navl" href="/essays/">All essays</a></p>'
 
 Write-Text (Join-Path $out 'index.html') (Fill (Src 'index.html') @{
@@ -270,6 +289,8 @@ Write-Text (Join-Path $out 'index.html') (Fill (Src 'index.html') @{
   PROJECTS  = $projects
   ESSAYS    = $homeEssays
   EMAIL     = $email
+  PHONE     = $phone
+  EXPERIENCE = $experience
   LINKS     = $links
   YEAR      = $year
 })
