@@ -71,8 +71,11 @@ h1, h2, h3 { margin: 0; font-weight: inherit; }
 
 /* ---- hero: the poster --------------------------------------------------- */
 .hero { padding-top: 28px; padding-bottom: 72px; text-align: center; }
-.hero__name { margin-top: 12px; padding-left: .42em; font-size: clamp(26px, 6.1vw, 88px); line-height: 1.1; font-weight: 300; letter-spacing: .42em; animation: track 1.7s var(--ease) both; }
-@keyframes track { from { letter-spacing: .95em; opacity: 0; } to { letter-spacing: .42em; opacity: 1; } }
+.hero__name { margin-top: 12px; padding-left: .42em; font-size: clamp(26px, 6.1vw, 88px); line-height: 1.1; font-weight: 300; letter-spacing: .42em; }
+/* The name gathers from a wide spread. Only transform and opacity move, so it stays smooth. */
+.hero__name .w { display: inline-block; white-space: nowrap; }
+.hero__name .ch { display: inline-block; will-change: transform, opacity; animation: gather 1.6s var(--ease) both; }
+@keyframes gather { from { opacity: 0; transform: translateX(calc(var(--o) * .5em)); } to { opacity: 1; transform: translateX(0); } }
 .credits { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 28px; margin-top: 20px; }
 .fade { animation: fade 1s ease both; animation-delay: var(--d, 0s); }
 @keyframes fade { from { opacity: 0; translate: 0 18px; } to { opacity: 1; translate: 0 0; } }

@@ -115,7 +115,21 @@ Write-Text (Join-Path $out 'essays\index.html') (Fill (Src 'essays.html') @{
 
 # ---- home: the poster ---------------------------------------------------------
 # Every i in the name is set bold and red, like the doubled letter on a film poster.
-$nameHtml = (Esc $site.name) -replace '(?i)i', '<span class="hot">$0</span>'
+# Each letter is its own piece so the name can gather from a wide spread by sliding,
+# which the browser animates smoothly (changing the letter spacing itself re-lays the page
+# out on every frame, and stutters). --o is how many places a letter sits from the middle.
+$chars = ([string]$site.name).ToCharArray()
+$mid = ($chars.Count - 1) / 2
+$nameHtml = ''
+$word = ''
+for ($i = 0; $i -lt $chars.Count; $i++) {
+  $c = [string]$chars[$i]
+  if ($c -eq ' ') { $nameHtml += "<span class=`"w`">$word</span> "; $word = ''; continue }
+  $hot = $(if ($c -ieq 'i') { ' hot' } else { '' })
+  $o = ($i - $mid).ToString('0.#', $inv)
+  $word += "<span class=`"ch$hot`" style=`"--o:$o`">$(Esc $c)</span>"
+}
+$nameHtml += "<span class=`"w`">$word</span>"
 
 # The picture in the middle of the poster. site.json "photoStyle" says what the file is:
 #   "artwork"  a finished piece that already has its own red sun and lines (shown as it is)
