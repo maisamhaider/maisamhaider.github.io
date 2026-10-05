@@ -2,8 +2,5 @@
 <path d="M310 0V740"></path>
 <path d="M-60 285H680"></path>
 <circle cx="310" cy="285" r="296"></circle>
-<path d="M558 285a124 124 0 0 1-124 124"></path>
-<circle cx="496" cy="470" r="76"></circle>
 <circle cx="124" cy="100" r="46"></circle>
-<path d="M78 100h92M124 54v92"></path>
 </svg>

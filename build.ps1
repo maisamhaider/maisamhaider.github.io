@@ -162,20 +162,73 @@ foreach ($row in @(@('Based in', $site.city, 'city'), @('Studying', $site.studyi
 $cv = ''
 if ($site.cv) {
   if (-not (Test-Path (Join-Path $assets $site.cv))) { throw "site.json names the CV '$($site.cv)' but assets\$($site.cv) does not exist." }
-  $cv = "<a class=`"btn btn--red`" href=`"/assets/$($site.cv)`">Download CV$down</a>"
+  $cv = "<a class=`"btn btn--ink`" href=`"/assets/$($site.cv)`">Download CV$down</a>"
 } else { $missing += 'cv' }
 
-$projects = ''
+# ---- work: three poster rows, then the rest as a list --------------------------
+# Screenshots are read from each app's own repo (one folder up), cut and shrunk here,
+# so this repo never holds a second copy of the originals.
+Add-Type -AssemblyName System.Drawing
+$root = Split-Path -Parent $here
+function Shot($rel, $cropTop, $name) {
+  $from = Join-Path $root $rel
+  if (-not (Test-Path $from)) { throw "site.json names the screenshot '$rel' but $from does not exist." }
+  $img = [System.Drawing.Image]::FromFile($from)
+  $w = 500
+  $srcH = $img.Height - $cropTop
+  $h = [int][math]::Round($srcH * $w / $img.Width)
+  $bmp = New-Object System.Drawing.Bitmap $w, $h
+  $g = [System.Drawing.Graphics]::FromImage($bmp)
+  $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+  $g.PixelOffsetMode = [System.Drawing.Drawing2D.PixelOffsetMode]::HighQuality
+  $g.DrawImage($img, (New-Object System.Drawing.Rectangle 0, 0, $w, $h), (New-Object System.Drawing.Rectangle 0, $cropTop, $img.Width, $srcH), [System.Drawing.GraphicsUnit]::Pixel)
+  $codec = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq 'image/jpeg' }
+  $quality = New-Object System.Drawing.Imaging.EncoderParameters 1
+  $quality.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter ([System.Drawing.Imaging.Encoder]::Quality, [long]84)
+  $dir = Join-Path $out 'assets\shots'
+  if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Force $dir | Out-Null }
+  $bmp.Save((Join-Path $dir "$name.jpg"), $codec, $quality)
+  $g.Dispose(); $bmp.Dispose(); $img.Dispose()
+  return @($w, $h)
+}
+
+# The construction drawing behind each poster: thin ink lines and one red shape.
+$motifs = @{
+  quarter = '<path class="fill" d="M300 330V60A270 270 0 0 0 30 330z"></path><circle cx="300" cy="330" r="270"></circle><path d="M300 10V590M10 330H590"></path>'
+  cross   = '<circle class="fill" cx="497" cy="452" r="44"></circle><path d="M425 10V590M10 150H590"></path><circle cx="425" cy="150" r="46"></circle><circle cx="425" cy="150" r="150"></circle>'
+  rings   = '<circle class="fill" cx="175" cy="300" r="62"></circle><circle cx="175" cy="300" r="124"></circle><circle cx="175" cy="300" r="186"></circle><circle cx="175" cy="300" r="248"></circle><path d="M10 300H590"></path>'
+}
+$go = '<svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg>'
+
+$films = ''
+$rows = ''
 $n = 0
 foreach ($p in $site.projects) {
   $n++
   $no = '{0:d2}' -f $n
-  $inner = "<div class=`"cap pc__top`"><span>No. $no</span><span>$(Esc $p.status)</span></div>" +
-           "<div class=`"pc__art`" aria-hidden=`"true`"><span class=`"pc__sun pc__sun--$($p.state)`"></span><span class=`"an pc__no`">$no</span><div class=`"pc__drips`">$cardDrips</div></div>" +
-           "<div class=`"pc__text`"><h3 class=`"an`">$(Esc $p.name)</h3><p>$(Esc $p.line)</p></div>"
-  if ($p.url) { $projects += "<a class=`"pc rv`" href=`"$($p.url)`">$inner</a>`n" }
-  else        { $projects += "<div class=`"pc rv`">$inner</div>`n" }
+  if ($p.featured) {
+    $shot = ''
+    if ($p.shot) {
+      $slug = ([string]$p.name).ToLower() -replace '[^a-z0-9]+', '-'
+      $dim = Shot $p.shot ([int]$p.cropTop) $slug
+      $shot = "<img class=`"film__shot rv`" src=`"/assets/shots/$slug.jpg`" width=`"$($dim[0])`" height=`"$($dim[1])`" alt=`"$(Esc $p.name) on a phone`" loading=`"lazy`">"
+    }
+    $motif = ''
+    if ($p.motif -and $motifs[$p.motif]) { $motif = "<svg class=`"motif`" viewBox=`"0 0 600 600`" aria-hidden=`"true`">$($motifs[$p.motif])</svg>" }
+    $cta = ''
+    if ($p.url) { $cta = "<a class=`"btn btn--line`" href=`"$($p.url)`">$(Esc $(if ($p.cta) { $p.cta } else { 'Visit' }))</a>" }
+    $films += "<article class=`"film`">" +
+              "<div class=`"film__text rv`"><div class=`"cap`"><span class=`"red`">No. $no</span> &mdash; $(Esc $p.status)</div><h3 class=`"an`">$(Esc $p.name)</h3><p class=`"film__line`">$(Esc $p.line)</p><div class=`"cap film__tags`">$(Esc $p.tags)</div>$cta</div>" +
+              "<div class=`"film__stage`"><span class=`"an film__no`" aria-hidden=`"true`">$no</span>$motif$shot</div>" +
+              "</article>`n"
+  } else {
+    $inner = "<span class=`"cap red idx__no`">$no</span><span class=`"an idx__name`">$(Esc $p.name)</span><span class=`"idx__line`">$(Esc $p.line)</span><span class=`"cap idx__tags`">$(Esc $p.tags)</span><span class=`"cap idx__status`">$(Esc $p.status)</span>"
+    if ($p.url) { $rows += "<a class=`"idx`" href=`"$($p.url)`">$inner$go</a>`n" }
+    else        { $rows += "<div class=`"idx`">$inner<span class=`"idx__sp`"></span></div>`n" }
+  }
 }
+$projects = "<div class=`"films`">`n$films</div>`n"
+if ($rows) { $projects += "<div class=`"cap measure more-work rv`"><span>More work</span><i></i></div>`n<div class=`"idxlist rv`">`n$rows</div>`n" }
 
 $email = ''
 if ($site.email) { $email = "<a class=`"an navl contact__mail rv`" href=`"mailto:$($site.email)`">$(Esc $site.email)</a>" }
