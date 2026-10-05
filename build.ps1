@@ -209,6 +209,28 @@ function Shot($rel, $cropTop, $name) {
   return @($w, $h)
 }
 
+# An app's real icon, read from its own repo and shrunk to 192px (an SVG is copied as it is).
+# A project with no icon gets a small empty ring, so the list still lines up.
+function Icon($rel, $name) {
+  $from = Join-Path $root $rel
+  if (-not (Test-Path $from)) { throw "site.json names the icon '$rel' but $from does not exist." }
+  $dir = Join-Path $out 'assets\icons'
+  if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Force $dir | Out-Null }
+  if ([System.IO.Path]::GetExtension($from).ToLower() -eq '.svg') {
+    Copy-Item $from (Join-Path $dir "$name.svg")
+    return "/assets/icons/$name.svg"
+  }
+  $img = [System.Drawing.Image]::FromFile($from)
+  $bmp = New-Object System.Drawing.Bitmap 192, 192
+  $g = [System.Drawing.Graphics]::FromImage($bmp)
+  $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+  $g.PixelOffsetMode = [System.Drawing.Drawing2D.PixelOffsetMode]::HighQuality
+  $g.DrawImage($img, 0, 0, 192, 192)
+  $bmp.Save((Join-Path $dir "$name.png"), [System.Drawing.Imaging.ImageFormat]::Png)
+  $g.Dispose(); $bmp.Dispose(); $img.Dispose()
+  return "/assets/icons/$name.png"
+}
+
 # The construction drawing behind each poster: thin ink lines and one red shape.
 $motifs = @{
   quarter = '<path class="fill" d="M300 330V60A270 270 0 0 0 30 330z"></path><circle cx="300" cy="330" r="270"></circle><path d="M300 10V590M10 330H590"></path>'
@@ -223,10 +245,12 @@ $n = 0
 foreach ($p in $site.projects) {
   $n++
   $no = '{0:d2}' -f $n
+  $slug = ([string]$p.name).ToLower() -replace '[^a-z0-9]+', '-'
+  $icon = '<span class="appicon appicon--none" aria-hidden="true"></span>'
+  if ($p.icon) { $icon = "<img class=`"appicon`" src=`"$(Icon $p.icon $slug)`" width=`"192`" height=`"192`" alt=`"`" loading=`"lazy`">" }
   if ($p.featured) {
     $shot = ''
     if ($p.shot) {
-      $slug = ([string]$p.name).ToLower() -replace '[^a-z0-9]+', '-'
       $dim = Shot $p.shot ([int]$p.cropTop) $slug
       $shot = "<img class=`"film__shot rv`" src=`"/assets/shots/$slug.jpg`" width=`"$($dim[0])`" height=`"$($dim[1])`" alt=`"$(Esc $p.name) on a phone`" loading=`"lazy`">"
     }
@@ -235,11 +259,11 @@ foreach ($p in $site.projects) {
     $cta = ''
     if ($p.url) { $cta = "<a class=`"btn btn--line`" href=`"$($p.url)`">$(Esc $(if ($p.cta) { $p.cta } else { 'Visit' }))</a>" }
     $films += "<article class=`"film`">" +
-              "<div class=`"film__text rv`"><div class=`"cap`"><span class=`"red`">No. $no</span> &mdash; $(Esc $p.status)</div><h3 class=`"an`">$(Esc $p.name)</h3><p class=`"film__line`">$(Esc $p.line)</p><div class=`"cap film__tags`">$(Esc $p.tags)</div>$cta</div>" +
+              "<div class=`"film__text rv`"><div class=`"cap`"><span class=`"red`">No. $no</span> &mdash; $(Esc $p.status)</div><div class=`"film__head`">$icon<h3 class=`"an`">$(Esc $p.name)</h3></div><p class=`"film__line`">$(Esc $p.line)</p><div class=`"cap film__tags`">$(Esc $p.tags)</div>$cta</div>" +
               "<div class=`"film__stage`"><span class=`"an film__no`" aria-hidden=`"true`">$no</span>$motif$shot</div>" +
               "</article>`n"
   } else {
-    $inner = "<span class=`"cap red idx__no`">$no</span><span class=`"an idx__name`">$(Esc $p.name)</span><span class=`"idx__line`">$(Esc $p.line)</span><span class=`"cap idx__tags`">$(Esc $p.tags)</span><span class=`"cap idx__status`">$(Esc $p.status)</span>"
+    $inner = "<span class=`"cap red idx__no`">$no</span>$icon<span class=`"an idx__name`">$(Esc $p.name)</span><span class=`"idx__line`">$(Esc $p.line)</span><span class=`"cap idx__tags`">$(Esc $p.tags)</span><span class=`"cap idx__status`">$(Esc $p.status)</span>"
     if ($p.url) { $rows += "<a class=`"idx`" href=`"$($p.url)`">$inner$go</a>`n" }
     else        { $rows += "<div class=`"idx`">$inner<span class=`"idx__sp`"></span></div>`n" }
   }

@@ -51,18 +51,18 @@
     }
   ],
 
-  "projectsNote": "Featured projects become the large poster rows. shot = a screenshot in the app's own repo (path from the folder above this one), cropTop cuts off the phone's status bar, motif = quarter, cross or rings. The rest are listed under More work.",
+  "projectsNote": "Featured projects become the large poster rows. shot = a screenshot and icon = the app's real icon, both in the app's own repo (path from the folder above this one), cropTop cuts off the phone's status bar, motif = quarter, cross or rings. The rest are listed under More work.",
   "projects": [
     { "name": "One Page", "line": "Read one page a day.", "status": "Live on Google Play", "tags": "Android / Kotlin / Firebase", "url": "https://zilloris.com/one-page/", "cta": "See the app",
-      "featured": true, "motif": "quarter", "shot": "one-page/store/screenshots/raw/reader.png", "cropTop": 100 },
+      "featured": true, "motif": "quarter", "shot": "one-page/store/screenshots/raw/reader.png", "cropTop": 100, "icon": "one-page/store/icon-512.png" },
     { "name": "Manuscript", "line": "Write one page a day until the draft is done.", "status": "In testing on Google Play", "tags": "Android / Kotlin / Firebase", "url": "https://zilloris.com/manuscript/", "cta": "See the app",
-      "featured": true, "motif": "cross", "shot": "manuscript/store/screenshots/b1_page.png", "cropTop": 100 },
+      "featured": true, "motif": "cross", "shot": "manuscript/store/screenshots/b1_page.png", "cropTop": 100, "icon": "manuscript/store/graphics/ic_play_512.png" },
     { "name": "Sabr", "line": "Quit one habit, build another.", "status": "In testing on Google Play", "tags": "Android / Kotlin", "url": "https://zilloris.com/sabr/", "cta": "See the app",
-      "featured": true, "motif": "rings", "shot": "sabr/store/screenshots/today.png", "cropTop": 100 },
-    { "name": "Dollorboy", "line": "Managed a quiz and learning platform for the Italian driving licence: testing, deployment, a campaign, and the link between the client and the team.", "status": "Client work", "tags": "Management / Testing / Deployment / Campaign", "url": "" },
+      "featured": true, "motif": "rings", "shot": "sabr/store/screenshots/today.png", "cropTop": 100, "icon": "sabr/design/icon/export/store/play-store-512.png" },
+    { "name": "Dollorboy", "line": "Managed a quiz and learning platform for the Italian driving licence: testing, deployment, a campaign, and the link between the client and the team.", "status": "Client work", "tags": "Management / Testing / Deployment / Campaign", "url": "", "icon": "Dollorboy/dollorboy-android/app/src/main/ic_launcher-playstore.png" },
     { "name": "Nightbook", "line": "A dream journal for the morning.", "status": "In development", "tags": "Android / Kotlin", "url": "" },
     { "name": "Projet Leyenda", "line": "Neural networks that classify, denoise and caption images.", "status": "In progress at CESI", "tags": "Python / TensorFlow", "url": "" },
-    { "name": "zilloris.com", "line": "The studio site. Plain HTML, no JavaScript, no tracking.", "status": "Live", "tags": "HTML / CSS / GitHub Pages", "url": "https://zilloris.com" }
+    { "name": "zilloris.com", "line": "The studio site. Plain HTML, no JavaScript, no tracking.", "status": "Live", "tags": "HTML / CSS / GitHub Pages", "url": "https://zilloris.com", "icon": "zilloris-site/src/favicon.svg" }
   ],
 
   "essays": [
