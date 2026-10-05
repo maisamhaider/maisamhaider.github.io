@@ -106,11 +106,12 @@ h1, h2, h3 { margin: 0; font-weight: inherit; }
 @keyframes ooze { from { transform: scaleY(1); } to { transform: scaleY(.76); } }
 /* A finished artwork brings its own sun and lines: it opens from the sun's centre. */
 .poster__art--artwork { aspect-ratio: auto; }
-.artwork { display: block; width: 100%; height: auto; animation: open 1.9s var(--ease) .25s both; }
-@keyframes open { from { clip-path: circle(0% at 52% 34%); } to { clip-path: circle(125% at 52% 34%); } }
+.artwork { display: block; width: 100%; height: auto; animation: open 3.4s cubic-bezier(.45, 0, .25, 1) .35s both; }
+/* Slow on purpose: the circle only has to reach 90% to uncover the whole picture, so none of the time is spent off-canvas. */
+@keyframes open { from { opacity: 0; clip-path: circle(0% at 52% 34%); } 35% { opacity: 1; } to { opacity: 1; clip-path: circle(90% at 52% 34%); } }
 /* Thin streaks that run on from the painted ones; their tops fade into the picture. */
 .poster__art--artwork .drips { left: 15%; top: 74%; width: 60%; height: 31%; justify-content: space-between; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 45%); mask-image: linear-gradient(to bottom, transparent, #000 45%); }
-.poster__art--artwork .drips span { flex: 0 0 calc(var(--w) * 1.4px); animation-delay: calc(var(--d) + .9s), calc(var(--d) + 2.7s); }
+.poster__art--artwork .drips span { flex: 0 0 calc(var(--w) * 1.4px); animation-delay: calc(var(--d) + 2.2s), calc(var(--d) + 4s); }
 .drips .hot { background: var(--red); }
 .hero__cta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; margin-top: 28px; }
 .hero__cta .btn { padding: 0 22px; }
