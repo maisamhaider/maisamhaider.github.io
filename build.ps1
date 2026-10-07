@@ -133,15 +133,18 @@ $nameHtml += "<span class=`"w`">$word</span>"
 
 # The picture in the middle of the poster. site.json "photoStyle" says what the file is:
 #   "artwork"  a finished piece that already has its own red sun and lines (shown as it is)
+#   "photo"    a colour cut-out of a person, kept in colour, with the drawing behind and the drips below
 #   "cutout"   a person on a transparent background (placed on the drawn sun, turned black and white)
 # With no photo at all, a plain silhouette stands in.
 $artwork = $false
+$photo = $false
 if ($site.photo) {
   if (-not (Test-Path (Join-Path $assets $site.photo))) { throw "site.json names the photo '$($site.photo)' but assets\$($site.photo) does not exist." }
   $artwork = ($site.photoStyle -eq 'artwork')
+  $photo = ($site.photoStyle -eq 'photo')
   $size = ''
   if ($site.photoSize) { $size = " width=`"$($site.photoSize[0])`" height=`"$($site.photoSize[1])`"" }
-  $cls = $(if ($artwork) { 'artwork' } else { 'figure figure--photo' })
+  $cls = $(if ($artwork) { 'artwork' } elseif ($photo) { 'photo' } else { 'figure figure--photo' })
   # photoFocus = the centre of the sun in the picture, in percent; the picture opens from there.
   $focus = ''
   if ($artwork -and $site.photoFocus) { $focus = " style=`"--fx:$($site.photoFocus[0])%;--fy:$($site.photoFocus[1])%`"" }
@@ -158,7 +161,7 @@ $drips = ''
 for ($i = 0; $i -lt $dh.Count; $i++) {
   $delay = (1.1 + (($i * 37) % 11) * 0.08).ToString('0.00', $inv)
   # Under an artwork the streaks are sparse and a few are red, to sit with the ones painted in it.
-  if ($artwork) { $gap = $(if ($i % 2 -eq 1) { ' class="gap"' } elseif ($i % 8 -eq 2) { ' class="hot"' } else { '' }) }
+  if ($artwork -or $photo) { $gap = $(if ($i % 2 -eq 1) { ' class="gap"' } elseif ($i % 8 -eq 2) { ' class="hot"' } else { '' }) }
   else          { $gap = $(if ($i % 6 -eq 3) { ' class="gap"' } else { '' }) }
   $drips += "<span$gap style=`"--w:$($dw[$i]);--h:$($dh[$i])%;--d:${delay}s`"></span>"
 }
@@ -168,8 +171,9 @@ $cardDrips = ''
 for ($i = 0; $i -lt $ch.Count; $i++) { $cardDrips += "<span style=`"--w:$($cw[$i]);--h:$($ch[$i])%`"></span>" }
 
 $dripsHtml = "<div class=`"drips`" aria-hidden=`"true`">$drips</div>"
-if ($artwork) { $art = "$figure`n$dripsHtml"; $artClass = ' poster__art--artwork' }
-else          { $art = "<div class=`"sun`"></div>`n$(Src '_lines.svg')$figure`n$dripsHtml"; $artClass = '' }
+if ($artwork)   { $art = "$figure`n$dripsHtml"; $artClass = ' poster__art--artwork' }
+elseif ($photo) { $art = "$(Src '_lines-photo.svg')$figure`n$dripsHtml"; $artClass = ' poster__art--photo' }
+else            { $art = "<div class=`"sun`"></div>`n$(Src '_lines.svg')$figure`n$dripsHtml"; $artClass = '' }
 
 $facts = ''
 foreach ($row in @(@('Based in', $site.city, 'city'), @('Studying', $site.studying, 'studying'), @('Coursework', $site.coursework, 'coursework'),@('Looking for', $site.lookingFor, 'lookingFor'), @('Stack', $site.stack, 'stack'))) {

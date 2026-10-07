@@ -13,9 +13,10 @@
   "lookingFor": "",
   "stack": "Kotlin, Java, Android, Firebase, Python, TensorFlow, Cloudflare, Bunny",
 
-  "photo": "portrait.webp",
-  "photoStyle": "artwork",
-  "photoSize": [859, 1267],
+  "photoNote": "photoStyle: artwork = a finished piece with its own sun (portrait.webp); photo = a colour cut-out of a person, shown in colour with the drawing behind (photo.webp); cutout = a cut-out turned black and white on the red sun.",
+  "photo": "photo.webp",
+  "photoStyle": "photo",
+  "photoSize": [1199, 1312],
   "photoFocus": [49, 27.6],
   "cv": "",
 

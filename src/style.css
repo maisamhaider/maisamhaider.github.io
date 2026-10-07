@@ -115,8 +115,16 @@ h1, h2, h3 { margin: 0; font-weight: inherit; }
 /* Slow on purpose: the circle only has to reach 90% to uncover the whole picture, so none of the time is spent off-canvas. */
 @keyframes open { from { opacity: 0; clip-path: circle(0% at var(--fx, 50%) var(--fy, 30%)); } 35% { opacity: 1; } to { opacity: 1; clip-path: circle(95% at var(--fx, 50%) var(--fy, 30%)); } }
 /* Thin streaks that run on from the painted ones; their tops fade into the picture. */
-.poster__art--artwork .drips { left: 16%; top: 80%; width: 62%; height: 23%; justify-content: space-between; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 45%); mask-image: linear-gradient(to bottom, transparent, #000 45%); }
-.poster__art--artwork .drips span { flex: 0 0 calc(var(--w) * 1.4px); animation-delay: calc(var(--d) + 2.2s), calc(var(--d) + 4s); }
+/* A colour photograph: kept in colour (the chair is the red), the drawing behind it, the bottom running into ink. */
+.poster__art--photo { flex-basis: clamp(360px, 76vh, 640px); aspect-ratio: auto; }
+.poster__art--photo .lines { z-index: 0; }
+.photo { position: relative; z-index: 1; display: block; width: 88%; height: auto; margin: 0 auto; filter: saturate(.88) contrast(1.03); -webkit-mask-image: linear-gradient(to bottom, #000 72%, rgba(0, 0, 0, .55) 86%, transparent 97%); mask-image: linear-gradient(to bottom, #000 72%, rgba(0, 0, 0, .55) 86%, transparent 97%); animation: photoin 1.6s var(--ease) .35s both; }
+@keyframes photoin { from { opacity: 0; translate: 0 36px; } to { opacity: 1; translate: 0 0; } }
+.poster__art--photo .drips { left: 18%; top: 76%; width: 64%; height: 28%; z-index: 2; }
+.poster__art--artwork .drips, .poster__art--photo .drips { left: 16%; top: 80%; width: 62%; height: 23%; justify-content: space-between; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 45%); mask-image: linear-gradient(to bottom, transparent, #000 45%); }
+.poster__art--artwork .drips span, .poster__art--photo .drips span { flex: 0 0 calc(var(--w) * 1.4px); animation-delay: calc(var(--d) + 2.2s), calc(var(--d) + 4s); }
+.poster__art--photo .drips { top: 76%; height: 28%; }
+.poster__art--photo .drips span { animation-delay: calc(var(--d) + 1.2s), calc(var(--d) + 3s); }
 .drips .hot { background: var(--red); }
 .hero__cta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; margin-top: 20px; }
 .hero__cta .btn { padding: 0 22px; }
