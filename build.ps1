@@ -172,7 +172,7 @@ for ($i = 0; $i -lt $ch.Count; $i++) { $cardDrips += "<span style=`"--w:$($cw[$i
 
 $dripsHtml = "<div class=`"drips`" aria-hidden=`"true`">$drips</div>"
 if ($artwork)   { $art = "$figure`n$dripsHtml"; $artClass = ' poster__art--artwork' }
-elseif ($photo) { $art = "$(Src '_lines-photo.svg')$figure`n$dripsHtml"; $artClass = ' poster__art--photo' }
+elseif ($photo) { $art = "$(Src '_lines-photo.svg')$figure"; $artClass = ' poster__art--photo' }   # no streaks under a photograph
 else            { $art = "<div class=`"sun`"></div>`n$(Src '_lines.svg')$figure`n$dripsHtml"; $artClass = '' }
 
 $facts = ''
