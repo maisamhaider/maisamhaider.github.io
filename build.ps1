@@ -60,10 +60,13 @@ if ($site.openToInternships) {
   $pill = '<a class="cap navl pill" href="/#contact"><span class="dot"></span>Open to internships</a>'
 }
 
+# The stylesheet link carries a short hash of the file, so a browser never shows an old copy after a change.
+$cssv = ([System.BitConverter]::ToString([System.Security.Cryptography.SHA1]::Create().ComputeHash([System.IO.File]::ReadAllBytes((Join-Path $here 'src\style.css')))) -replace '-', '').Substring(0, 8).ToLower()
+
 function Head($title, $desc, $path, $type) {
   $image = ''
   if ($site.photo) { $image = "<meta property=`"og:image`" content=`"$base/assets/$($site.photo)`">" }
-  Fill (Src '_head.html') @{ TITLE = (Esc $title); DESC = (Esc $desc); CANON = "$base$path"; OGTYPE = $type; OGIMAGE = $image }
+  Fill (Src '_head.html') @{ TITLE = (Esc $title); DESC = (Esc $desc); CANON = "$base$path"; OGTYPE = $type; OGIMAGE = $image; CSSV = $cssv }
 }
 function Top($onEssays) {
   $cur = ''
