@@ -189,6 +189,13 @@ h1, h2, h3 { margin: 0; font-weight: inherit; }
 .motif .fill { fill: var(--red); stroke: none; opacity: 1; }
 .film__shot { position: relative; width: 250px; height: auto; border: 1px solid var(--ink); border-radius: 26px; transition: transform .45s var(--ease), box-shadow .45s ease; }
 .film:hover .film__shot { transform: translate(-6px, -6px); box-shadow: 12px 12px 0 var(--ink); }
+/* Three phones: the middle one in front, the two beside it a step back and a little lower. */
+.film__shots { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 600px; }
+.film__shots .film__shot { width: 42%; z-index: 1; }
+.film__shots .film__shot--l, .film__shots .film__shot--r { width: 35%; margin: 0 -6%; z-index: 0; translate: 0 7%; border-radius: 22px; }
+.film:hover .film__shots .film__shot--c { transform: translateY(-10px); box-shadow: 10px 10px 0 var(--ink); }
+.film:hover .film__shots .film__shot--l { transform: translateX(-10px); box-shadow: none; }
+.film:hover .film__shots .film__shot--r { transform: translateX(10px); box-shadow: none; }
 @media (min-width: 900px) {
   .film:nth-child(even) .film__stage { order: -1; }
   .film:nth-child(even) .film__no { right: auto; left: -2%; }

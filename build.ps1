@@ -256,9 +256,20 @@ foreach ($p in $site.projects) {
   $icon = '<span class="appicon appicon--none" aria-hidden="true"></span>'
   if ($p.icon) { $icon = "<img class=`"appicon`" src=`"$(Icon $p.icon $slug)`" width=`"192`" height=`"192`" alt=`"`" loading=`"lazy`">" }
   if ($p.featured) {
+    # Three screenshots fan out as three phones (left, centre, right); one screenshot is one phone.
     $shot = ''
-    if ($p.shot) {
-      $dim = Shot $p.shot ([int]$p.cropTop) $slug
+    $list = @()
+    if ($p.shots) { $list = @($p.shots) } elseif ($p.shot) { $list = @($p.shot) }
+    if ($list.Count -eq 3) {
+      $side = 'l', 'c', 'r'
+      $phones = ''
+      for ($k = 0; $k -lt 3; $k++) {
+        $dim = Shot $list[$k] ([int]$p.cropTop) "$slug-$($k + 1)"
+        $phones += "<img class=`"film__shot film__shot--$($side[$k])`" src=`"/assets/shots/$slug-$($k + 1).jpg`" width=`"$($dim[0])`" height=`"$($dim[1])`" alt=`"$(Esc $p.name) on a phone, screen $($k + 1) of 3`" loading=`"lazy`">"
+      }
+      $shot = "<div class=`"film__shots rv`">$phones</div>"
+    } elseif ($list.Count -ge 1) {
+      $dim = Shot $list[0] ([int]$p.cropTop) $slug
       $shot = "<img class=`"film__shot rv`" src=`"/assets/shots/$slug.jpg`" width=`"$($dim[0])`" height=`"$($dim[1])`" alt=`"$(Esc $p.name) on a phone`" loading=`"lazy`">"
     }
     $motif = ''
