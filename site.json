@@ -63,6 +63,8 @@
     { "name": "Sabr", "line": "Quit one habit, build another.", "status": "In testing on Google Play", "tags": "Android / Kotlin", "url": "https://zilloris.com/sabr/", "cta": "See the app",
       "featured": true, "motif": "rings", "shot": "sabr/store/screenshots/today.png", "cropTop": 100, "icon": "sabr/design/icon/export/store/play-store-512.png" },
     { "name": "Dollorboy", "line": "Managed a quiz and learning platform for the Italian driving licence: testing, deployment, a campaign, and the link between the client and the team.", "status": "Client work", "tags": "Management / Testing / Deployment / Campaign", "url": "", "icon": "Dollorboy/dollorboy-android/app/src/main/ic_launcher-playstore.png" },
+    { "name": "Arkiv", "line": "A locker for the household’s documents: expiry reminders, share as PDF, PDF tools on the phone.", "status": "In development", "tags": "Android / Kotlin / Jetpack Compose / ML Kit", "url": "", "icon": "arkiv/design/icon/arkiv-icon.svg" },
+    { "name": "Atomiser", "line": "A shelf for your perfumes.", "status": "In development", "tags": "Android / Kotlin / Jetpack Compose / ML Kit", "url": "", "icon": "atomiser/design/icon/png/playstore-512.png" },
     { "name": "Nightbook", "line": "A dream journal for the morning.", "status": "In development", "tags": "Android / Kotlin", "url": "" },
     { "name": "Projet Leyenda", "line": "Neural networks that classify, denoise and caption images.", "status": "In progress at CESI", "tags": "Python / TensorFlow", "url": "" },
     { "name": "zilloris.com", "line": "The studio site. Plain HTML, no JavaScript, no tracking.", "status": "Live", "tags": "HTML / CSS / GitHub Pages", "url": "https://zilloris.com", "icon": "zilloris-site/src/favicon.svg" }
