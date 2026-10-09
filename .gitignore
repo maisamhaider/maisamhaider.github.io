@@ -1,2 +1,5 @@
 # The local preview build (drafts included). Never published.
 .preview/
+
+# The rendered CV (built from cv/cv.html by cv/build.ps1). Never published with the site.
+cv/out/

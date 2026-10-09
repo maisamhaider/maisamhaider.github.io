@@ -3,8 +3,10 @@
 
   "name": "Maisam Haider",
   "url": "https://maisamhaider.github.io",
-  "description": "Maisam Haider — software engineer and founder of Zilloris. Small Android apps, a Master of Computer Science, and essays.",
+  "description": "Maisam Haider — software engineer and founder of Zilloris. Small Android apps and a Master of Computer Science.",
 
+  "writing": false,
+  "writingNote": "true brings back the Essays section, the Essays page and the essay pages; the entries below and content/essays/ are kept for that day.",
   "openToInternships": true,
   "email": "",
   "city": "",

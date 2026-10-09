@@ -17,6 +17,9 @@ The build prints what is still missing.
 
 ## Write an essay
 
+Essays are switched off (`"writing": false` in `site.json`); the owner removed the section on
+9 October 2026. Set it to `true` to bring the section and pages back. Everything below still applies.
+
 1. Add an entry to `essays` in `site.json`: `slug`, `title`, `date` (`2026-10-05`),
    `summary`, and `kind` (`Essay` or `Note`).
 2. Write the text in `content/essays/<slug>.html`: `<p>` for paragraphs, `<h2>` for

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Maisam Haider — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@300..700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600&display=block" rel="stylesheet">
+<style>
+/* One A4 page. Same voice as the portfolio: ink, paper, one red. Built to PDF by cv/build.ps1. */
+@page { size: A4; margin: 0; }
+:root { --ink: #141414; --red: #BE1E17; --soft: #55534F; --rule: #141414; --paper: #FFFFFF; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--paper); }
+body { width: 210mm; height: 297mm; padding: 14mm 15mm 12mm; color: var(--ink); font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; font-size: 9.6pt; line-height: 1.42; position: relative; overflow: hidden; }
+a { color: inherit; text-decoration: none; }
+p, ul, h1, h2, h3 { margin: 0; }
+ul { padding: 0; list-style: none; }
+.an { font-family: 'Antonio', 'Arial Narrow', sans-serif; text-transform: uppercase; }
+.cap { font-family: 'IBM Plex Sans Condensed', 'Arial Narrow', sans-serif; font-size: 7.6pt; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+
+/* head */
+.sun { position: absolute; right: 15mm; top: 12mm; width: 16mm; height: 16mm; border-radius: 50%; background: var(--red); }
+.head { position: relative; padding-right: 22mm; }
+.name { font-size: 34pt; line-height: 1; font-weight: 500; letter-spacing: .06em; }
+.name b { font-weight: 700; color: var(--red); }
+.role { margin-top: 3mm; font-size: 12.5pt; line-height: 1.2; font-weight: 400; letter-spacing: .04em; }
+.contact { display: flex; flex-wrap: wrap; gap: 1.2mm 4.5mm; margin-top: 4.5mm; padding-top: 3mm; border-top: 1px solid var(--rule); font-size: 8.6pt; color: var(--ink); }
+.contact span:not(:last-child)::after { content: "·"; margin-left: 4.5mm; color: var(--soft); }
+
+/* columns */
+.cols { display: grid; grid-template-columns: 58mm 1fr; gap: 0 9mm; margin-top: 6mm; }
+section { margin-bottom: 5mm; break-inside: avoid; }
+h2 { display: flex; align-items: center; gap: 2.6mm; margin-bottom: 2.4mm; font-size: 11.5pt; line-height: 1; font-weight: 500; letter-spacing: .12em; }
+h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+h2 i { font-family: 'IBM Plex Sans Condensed', sans-serif; font-style: normal; font-size: 7.6pt; font-weight: 600; letter-spacing: .1em; color: var(--red); }
+h3 { font-size: 10.2pt; font-weight: 600; line-height: 1.25; }
+.meta { display: flex; justify-content: space-between; gap: 4mm; margin-top: .4mm; font-size: 8.6pt; color: var(--soft); }
+.meta b { font-weight: 500; color: var(--ink); }
+.bul li { position: relative; padding-left: 4mm; margin-top: 1mm; }
+.bul li::before { content: ""; position: absolute; left: 0; top: .55em; width: 1.6mm; height: 1.6mm; background: var(--ink); }
+.job + .job, .app + .app { margin-top: 3.2mm; }
+.app h3 { display: flex; align-items: baseline; gap: 2.5mm; }
+.app h3 .st { font-family: 'IBM Plex Sans Condensed', sans-serif; font-size: 7.4pt; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--red); }
+.app p { color: var(--ink); }
+.app .tech { font-size: 8.4pt; color: var(--soft); }
+.tags { display: flex; flex-wrap: wrap; gap: 1.6mm; }
+.tags span { padding: .9mm 2.2mm; border: 1px solid var(--ink); font-size: 8.4pt; line-height: 1.2; }
+.tags .next { border-color: var(--red); color: var(--red); }
+.kv li { display: flex; justify-content: space-between; gap: 3mm; padding: 1.1mm 0; border-bottom: 1px solid #DDDAD3; }
+.kv li:last-child { border-bottom: 0; }
+.kv b { font-weight: 500; }
+.edu + .edu { margin-top: 2.6mm; }
+.edu .meta { flex-direction: column; gap: 0; }
+.summary { font-size: 9.8pt; line-height: 1.45; }
+.foot { position: absolute; left: 15mm; right: 15mm; bottom: 8mm; display: flex; justify-content: space-between; font-size: 7.4pt; color: var(--soft); }
+</style>
+</head>
+<body>
+<div class="sun" aria-hidden="true"></div>
+
+<header class="head">
+<h1 class="an name">Ma<b>i</b>sam Ha<b>i</b>der</h1>
+<p class="an role">Mobile Application Developer — Android expert, learning iOS</p>
+<div class="contact">
+<span>+33-781-882-419</span>
+<span>maisam.haider@viacesi.fr</span>
+<span>G503, 2 Boulevard du Maréchal Leclerc, Aix-en-Provence</span>
+<span>linkedin.com/in/maisamhaider</span>
+<span>github.com/maisamhaider</span>
+<span>zilloris.com</span>
+</div>
+</header>
+
+<div class="cols">
+<aside>
+
+<section>
+<h2 class="an"><i>01</i>Skills</h2>
+<div class="tags">
+<span>Android</span><span>Kotlin</span><span>Java</span><span>Jetpack</span><span>Jetpack Compose</span><span>Firebase</span><span>ML Kit</span><span>REST APIs</span><span>Git</span><span>Python</span><span>TensorFlow</span><span>Cloudflare</span><span>Bunny CDN</span>
+<span class="next">Learning next: iOS · Swift · SwiftUI</span>
+</div>
+</section>
+
+<section>
+<h2 class="an"><i>02</i>Education</h2>
+<div class="edu">
+<h3>Master of Computer Science</h3>
+<div class="meta"><b>CESI</b><span>2025 – 2027</span></div>
+</div>
+<div class="edu">
+<h3>Bachelor of Software Engineering</h3>
+<div class="meta"><b>Iqra National University, Peshawar</b><span>2015 – 2019</span></div>
+</div>
+</section>
+
+<section>
+<h2 class="an"><i>03</i>Languages</h2>
+<ul class="kv">
+<li><b>English</b><span>B2</span></li>
+<li><b>Urdu</b><span>C2</span></li>
+<li><b>Pashto</b><span>C2</span></li>
+<li><b>French</b><span>A1</span></li>
+</ul>
+</section>
+
+<section>
+<h2 class="an"><i>04</i>Strengths</h2>
+<ul class="bul">
+<li>Excellent interpersonal and communication skills</li>
+<li>Dynamic and energetic</li>
+<li>Problem solving</li>
+<li>Calm under pressure</li>
+</ul>
+</section>
+
+</aside>
+<main>
+
+<section>
+<h2 class="an"><i>05</i>Summary</h2>
+<p class="summary">Mobile Application Developer with 5+ years of Android experience in Kotlin and Java, and founder of Zilloris, a studio that publishes small, focused Android apps on Google Play. Currently completing a Master of Computer Science at CESI (2025–2027). Expert in Android and eager to extend the same craft to iOS (Swift, SwiftUI). Seeking a 4–6 month internship as a Mobile Application Developer where I can ship production apps and keep learning.</p>
+</section>
+
+<section>
+<h2 class="an"><i>06</i>Experience</h2>
+<div class="job">
+<h3>Android Developer</h3>
+<div class="meta"><b>Hura Technologies · 9D Technologies</b><span>2019 – 2024</span></div>
+<ul class="bul">
+<li>Developed and maintained production Android applications in Kotlin and Java</li>
+<li>Translated designs into performant, accessible UIs; multi-device and OS compatibility</li>
+<li>Collaborated closely with QA and product teams; owned release cycles and post-launch monitoring</li>
+</ul>
+</div>
+<div class="job">
+<h3>Founder &amp; Developer</h3>
+<div class="meta"><b>Zilloris — own studio</b><span>2026 – present</span></div>
+<ul class="bul">
+<li>Design, build, test and publish small Android apps under one rule: one app, one problem</li>
+<li>One Page live on Google Play; Manuscript and Sabr in testing; more in development</li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2 class="an"><i>07</i>Apps</h2>
+<div class="app">
+<h3>One Page <span class="st">Live on Google Play · Oct 2026</span></h3>
+<p>Read one page a day. <span class="tech">Kotlin, Firebase</span></p>
+</div>
+<div class="app">
+<h3>Manuscript <span class="st">In testing on Google Play</span></h3>
+<p>Write one page a day until the draft is done. <span class="tech">Kotlin, Firebase</span></p>
+</div>
+<div class="app">
+<h3>Sabr <span class="st">In testing on Google Play</span></h3>
+<p>Quit one habit, build another. <span class="tech">Kotlin</span></p>
+</div>
+<div class="app">
+<h3>Nightbook <span class="st">In development</span></h3>
+<p>A dream journal for the morning. <span class="tech">Kotlin</span></p>
+</div>
+<div class="app">
+<h3>Atomiser <span class="st">In development</span></h3>
+<p>A shelf for your perfumes. <span class="tech">Kotlin, Jetpack Compose, ML Kit</span></p>
+</div>
+<div class="app">
+<h3>Dollorboy <span class="st">Client work</span></h3>
+<p>Quiz and learning platform for the Italian driving licence (Android, iOS, web, API). Managed testing, deployment, a launch campaign and the link between the client and the team.</p>
+</div>
+</section>
+
+</main>
+</div>
+
+<div class="foot"><span>Maisam Haider — Mobile Application Developer</span><span>October 2026</span></div>
+</body>
+</html>

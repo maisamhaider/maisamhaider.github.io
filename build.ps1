@@ -87,6 +87,9 @@ function Essay-List($list, $extra) {
   "<div class=`"eslist rv`">`n$rows`n</div>$extra"
 }
 
+# Essays are switched off with "writing": false in site.json: no pages, no list, nothing in the sitemap.
+$writing = [bool]$site.writing
+if (-not $writing) { $essays = @() }
 foreach ($e in $essays) {
   $file = Join-Path $here "content\essays\$($e.slug).html"
   if (-not (Test-Path $file)) { throw "site.json lists the essay '$($e.slug)' but content\essays\$($e.slug).html does not exist." }
@@ -105,13 +108,13 @@ foreach ($e in $essays) {
   Write-Text (Join-Path $out "essays\$($e.slug)\index.html") $page
 }
 
-Write-Text (Join-Path $out 'essays\index.html') (Fill (Src 'essays.html') @{
+if ($writing) { Write-Text (Join-Path $out 'essays\index.html') (Fill (Src 'essays.html') @{
   HEAD   = Head "Essays - $($site.name)" "Essays and notes by $($site.name)." '/essays/' 'website'
   TOP    = Top $true
   ESSAYS = Essay-List $essays ''
   YEAR   = $year
   NAME   = Esc $site.name
-})
+}) }
 
 # ---- home: the poster ---------------------------------------------------------
 # Every i in the name is set bold and red, like the doubled letter on a film poster.
@@ -331,7 +334,8 @@ Write-Text (Join-Path $out '404.html') (Fill (Src '404.html') @{
 })
 
 # ---- sitemap ------------------------------------------------------------------
-$urls = @('/', '/essays/') + @($essays | ForEach-Object { "/essays/$($_.slug)/" })
+$urls = @('/')
+if ($writing) { $urls += @('/essays/') + @($essays | ForEach-Object { "/essays/$($_.slug)/" }) }
 $map = '<?xml version="1.0" encoding="UTF-8"?>' + "`n" + '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "`n"
 foreach ($u in $urls) { $map += "<url><loc>$base$u</loc></url>`n" }
 Write-Text (Join-Path $out 'sitemap.xml') ($map + "</urlset>`n")
